@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header">Original Header</h1>
+    <div class="container">
+        <p>This is the first paragraph.</p>
+        <p>This is the second paragraph.</p>
+    </div>
+
+    <script>
+        // Change the text content of the <h1> element
+        const header = document.getElementById('header');
+        header.textContent = 'Welcome to the DOM World!';
+
+        // Change the text color of all <p> elements to blue
+        const paragraphs = document.getElementsByTagName('p');
+        for (let i = 0; i < paragraphs.length; i++) {
+            paragraphs[i].style.color = 'blue';
+        }
+
+        // Change the background color of the first <div> with the class 'container'
+        const container = document.querySelector('.container');
+        container.style.backgroundColor = 'yellow';
+    </script>
+</body>
+</html>
