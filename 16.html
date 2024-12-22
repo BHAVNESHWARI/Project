@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 5px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        li.completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .task-text {
+            flex: 1;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enhanced Todo List</h1>
+    
+    <!-- Input fields -->
+    <input type="text" id="task-input" placeholder="Add a new task">
+    <button id="add-task-button">Add Task</button>
+    <br>
+    <input type="text" id="search-input" placeholder="Search tasks">
+    
+    <!-- Task List -->
+    <ul id="task-list"></ul>
+
+    <script>
+        // Select elements
+        const taskInput = document.getElementById('task-input');
+        const addTaskButton = document.getElementById('add-task-button');
+        const searchInput = document.getElementById('search-input');
+        const taskList = document.getElementById('task-list');
+        const TASKS_KEY = 'tasks';
+
+        // Load tasks from localStorage
+        let tasks = JSON.parse(localStorage.getItem(TASKS_KEY)) || [];
+
+        // Save tasks to localStorage
+        function saveTasks() {
+            localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
+        }
+
+        // Render tasks
+        function renderTasks(filter = '') {
+            taskList.innerHTML = ''; // Clear the list
+            tasks
+                .filter(task => task.text.toLowerCase().includes(filter.toLowerCase()))
+                .forEach(task => {
+                    const li = document.createElement('li');
+                    li.className = task.completed ? 'completed' : '';
+                    
+                    const taskText = document.createElement('span');
+                    taskText.textContent = task.text;
+                    taskText.className = 'task-text';
+                    li.appendChild(taskText);
+
+                    // Complete task button
+                    const completeButton = document.createElement('button');
+                    completeButton.textContent = task.completed ? 'Undo' : 'Complete';
+                    completeButton.addEventListener('click', () => {
+                        task.completed = !task.completed;
+                        saveTasks();
+                        renderTasks(searchInput.value);
+                    });
+                    li.appendChild(completeButton);
+
+                    // Remove task button
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.addEventListener('click', () => {
+                        tasks = tasks.filter(t => t.id !== task.id);
+                        saveTasks();
+                        renderTasks(searchInput.value);
+                    });
+                    li.appendChild(removeButton);
+
+                    taskList.appendChild(li);
+                });
+        }
+
+        // Add a new task
+        addTaskButton.addEventListener('click', () => {
+            const taskText = taskInput.value.trim();
+            if (taskText) {
+                tasks.push({
+                    id: Date.now(),
+                    text: taskText,
+                    completed: false
+                });
+                saveTasks();
+                renderTasks();
+                taskInput.value = '';
+            } else {
+                alert('Please enter a task!');
+            }
+        });
+
+        // Real-time search
+        searchInput.addEventListener('input', () => {
+            renderTasks(searchInput.value);
+        });
+
+        // Initial render
+        renderTasks();
+    </script>
+</body>
+</html>
