@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paragraph Manipulation</title>
+    <style>
+        #content-area {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Paragraphs</h1>
+    
+    <!-- Buttons -->
+    <button id="add-paragraph">Add Paragraph</button>
+    <button id="remove-paragraph">Remove Last Paragraph</button>
+    
+    <!-- Div for paragraphs -->
+    <div id="content-area">
+        <!-- Dynamic paragraphs will be added here -->
+    </div>
+    
+    <script>
+        // Select elements
+        const contentArea = document.getElementById('content-area');
+        const addParagraphBtn = document.getElementById('add-paragraph');
+        const removeParagraphBtn = document.getElementById('remove-paragraph');
+
+        // Event listener for adding a paragraph
+        addParagraphBtn.addEventListener('click', () => {
+            // Create a new paragraph element
+            const newParagraph = document.createElement('p');
+            newParagraph.textContent = 'This is a new paragraph.';
+            
+            // Append the new paragraph to the content area
+            contentArea.appendChild(newParagraph);
+        });
+
+        // Event listener for removing the last paragraph
+        removeParagraphBtn.addEventListener('click', () => {
+            // Check if there are any paragraphs to remove
+            const lastParagraph = contentArea.lastElementChild;
+            if (lastParagraph) {
+                // Remove the last paragraph from the content area
+                contentArea.removeChild(lastParagraph);
+            }
+        });
+    </script>
+</body>
+</html>
