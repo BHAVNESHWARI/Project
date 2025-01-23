@@ -1,0 +1,81 @@
+1. How do you list all the databases present in your MongoDB server?
+ANS: Use the command `show dbs`.
+
+2. What command is used to create or switch to a database in MongoDB?
+ANS: Use the command `use <database_name>`.
+
+3. How can you create a collection named "students" in your MongoDB database?
+ANS: Use the command `db.createCollection("students")`.
+
+4. Write the command to insert a single document into the "students" collection with at least three fields: name, age, and course.
+ANS: Use the command `db.students.insertOne({ name: "John Doe", age: 21, course: "Computer Science" })`.
+
+5. How would you insert multiple documents into the "students" collection in a single command?
+ANS: Use the command `db.students.insertMany([{ name: "Alice", age: 22, course: "Mathematics" }, { name: "Bob", age: 23, course: "Physics" }])`.
+
+6. What command is used to find or read all documents in the "students" collection?
+ANS: Use the command `db.students.find()`.
+
+7. How can you read or find the first document in the "students" collection?
+ANS: Use the command `db.students.findOne()`.
+
+8. Describe the command to update the course field of a specific student named "John Doe" to "Data Science".
+ANS: Use the command `db.students.updateOne({ name: "John Doe" }, { $set: { course: "Data Science" } })`.
+
+9. What command would you use to increment the age field of all documents in the "students" collection by 1?
+ANS: Use the command `db.students.updateMany({}, { $inc: { age: 1 } })`.
+
+10. How can you delete a document with a specific name from the "students" collection?
+ANS: Use the command `db.students.deleteOne({ name: "John Doe" })`.
+
+11. Write the command to delete all documents from the "students" collection where the age is greater than or equal to a specific value.
+ANS: Use the command `db.students.deleteMany({ age: { $gte: 25 } })`.
+
+12. How do you find documents in the "students" collection where the course field is "Data Science"?
+ANS: Use the command `db.students.find({ course: "Data Science" })`.
+
+13. Find the employee with employee_id 25.
+ANS: Use the command `db.employees.find({ employee_id: 25 })`.
+
+14. Find all employees in Department3.
+ANS: Use the command `db.employees.find({ department: "Department3" })`.
+
+15. List all employees with a salary greater than 55000.
+ANS: Use the command `db.employees.find({ salary: { $gt: 55000 } })`.
+
+16. Count the number of employees in Department1.
+ANS: Use the command `db.employees.countDocuments({ department: "Department1" })`.
+
+17. Increase the salary of the employee with employee_id 50 by 5000.
+ANS: Use the command `db.employees.updateOne({ employee_id: 50 }, { $inc: { salary: 5000 } })`.
+
+18. Find all employees who joined after 2022-01-15.
+ANS: Use the command `db.employees.find({ joined_date: { $gt: new Date("2022-01-15") } })`.
+
+19. Delete the employee with employee_id 10.
+ANS: Use the command `db.employees.deleteOne({ employee_id: 10 })`.
+
+20. Find all employees whose last name starts with 'L'.
+ANS: Use the command `db.employees.find({ last_name: { $regex: "^L" } })`.
+
+21. Find all employees with no manager (manager_id is None).
+ANS: Use the command `db.employees.find({ manager_id: null })`.
+
+22. Find all employees who are older than 30.
+ANS: Use the command `db.employees.find({ age: { $gt: 30 } })`.
+
+23. Update the department of the employee with employee_id 75 to Department2.
+ANS: Use the command `db.employees.updateOne({ employee_id: 75 }, { $set: { department: "Department2" } })`.
+
+24. Find all employees whose email contains 'firstname5'.
+ANS: Use the command `db.employees.find({ email: { $regex: "firstname5" } })`.
+
+25. Find all employees who joined on or before 2022-01-10.
+ANS: Use the command `db.employees.find({ joined_date: { $lte: new Date("2022-01-10") } })`.
+
+26. Retrieve all employees sorted by salary in descending order.
+ANS: Use the command `db.employees.find().sort({ salary: -1 })`.
+
+27. Count the number of employees who are in Department4 and have a salary above 52000.
+ANS: Use the command `db.employees.countDocuments({ department: "Department4", salary: { $gt: 52000 } })`.
+
